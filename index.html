@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title> </title>
-    </head>
-    <body>
-        <script>
-       var xmlrequest = new XMLHttpRequest();
-       xml.onclick= open() {
-            alert("Definition: A statement of the exact meaning of a word, especially in a dictionary.");
+<body>
+<div>
+<div style='height: 100px; background-color: purple;'> 
+    <h2 style='color:white; padding:40px;'>Online Dictionary</h2></div>
+<div style='height: 300px; background-color: lightgrey;'>   
+    <p><b>Enter a word to find its definition:</b></p>
+       <form action="request.php"><input type="text" name="q" id="word">
+        <br>
+        <div><input type="submit" value="Search" onclick="getDefinition(); return false;">
+        </form></br>
+        </div>
+        <div id="result"><h2>THE RESULTS</h2></div>
+</div>
+</div>
+<script type="text/javascript">
+function getDefinition() {
+    var input = document.getElementById('word');
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+           if (xmlhttp.status == 200) {
+                var defn=document.getElementById("result");
+                defn.innerHTML=xmlhttp.responseText;
+           
+           }
         }
-        xmlrequest.open("GET", "request.php?q=definition", true);
-        xmlrequest.send();
-        </script>
-    </body>
+    };
+    xmlhttp.open("GET", "request.php?q=",+input,true);
+    xmlhttp.send();
+}
+</script>
+
+</body>
 </html>
